@@ -29,6 +29,21 @@
         }
       });
     </script>
+
+    <!-- Image link template to be reused. 
+  Access this site over HTTPS to enter VR mode and grant access to the device sensors
+-->
+  <script id="link" type="text/html">
+    <a-entity class="link"
+      geometry="primitive: plane; height: 1; width: 1"
+      material="shader: flat; src: ${thumb}"
+      event-set__mouseenter="scale: 1.2 1.2 1"
+      event-set__mouseleave="scale: 1 1 1"
+      event-set__click="_target: #image-360; _delay: 300; material.src: ${src}"
+      proxy-event="event: click; to: #image-360; as: fade"
+      sound="on: click; src: #click-sound"></a-entity>
+  </script>
+
   </head>
   <body>
 
@@ -45,6 +60,9 @@
             <a class="nav-link" href="#">Home
               <span class="sr-only">(current)</span>
             </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Other 3D Model</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
@@ -75,8 +93,9 @@
       <a-entity gltf-model="#myCarModel"></a-entity>
 
       <!--Imagen-->
-      <a-entity template="src: #link" data-src="#fractal" data-thumb="#Fractal-thumb"></a-entity>
-
+      <a-entity id="links" layout="type: line; margin: 1.5" position="-1.5 -.8 -4">
+        <a-entity template="src: #link" data-src="#fractal" data-thumb="#Fractal-thumb"></a-entity>
+      </a-entity>
       <!--Controles de camara
 
       <a-entity camera look-controls>
@@ -91,5 +110,9 @@
       -->
 
     </a-scene>
+
+    <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
