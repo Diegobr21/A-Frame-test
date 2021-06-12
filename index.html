@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+    <title>FIME - FERIA DEL EMPLEO</title>
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <!--script src="show_model.js"></script-->
     <script>
@@ -27,12 +33,32 @@
          <!--
         <a-asset-item id="myCarModel" src="https://cdn.aframe.io/test-models/models/glTF-2.0/virtualcity/VC.gltf"></a-asset-item>
             show_model.js --> 
-        <a-asset-item id="myCarModel" src="models/scene.gltf"></a-asset-item>    
+        <a-asset-item id="myCarModel" src="models/scene.gltf"></a-asset-item>   
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+        <img id="fractal" crossorigin="anonymous" src="images/f2.jpg"> 
     </a-assets>
+    
+    <!--Modelo 3d-->
       <a-entity gltf-model="#myCarModel"></a-entity>
       <a-entity position="0 1 0"
                 text="Hola Dharma, ¿estas lista?">
       </a-entity>
+
+      <!--Imagen-->
+      <a-entity template="src: #link" data-src="#fractal" data-thumb="#Fractal-thumb"></a-entity>
+
+      <!--Controles de camara-->
+
+      <a-entity camera look-controls>
+        <a-cursor
+          id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__mouseenter="_event: mouseenter; color: springgreen"
+          event-set__mouseleave="_event: mouseleave; color: black"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+
     </a-scene>
   </body>
 </html>
