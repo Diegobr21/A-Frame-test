@@ -79,6 +79,7 @@
         <a-asset-item id="myCarModel" src="https://cdn.aframe.io/test-models/models/glTF-2.0/virtualcity/VC.gltf"></a-asset-item>
             show_model.js --> 
         <a-asset-item id="myCarModel" src="models/scene.gltf"></a-asset-item>   
+        <a-asset-item id="amongUS" src="models/among us.obj"></a-asset-item> 
         <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
         <img id="fractal" crossorigin="anonymous" src="images/f2.jpg"> 
     </a-assets>
@@ -95,9 +96,11 @@
 
             <!-- PLACE 3D OBJECTS HERE TO TRACK FROM THE INSTANT ANCHOR 
             <a-entity gltf-model="#myCarModel"></a-entity>
+            <a-box position="0 0.5 0"></a-box>
              -->
                     <!--Modelo 3d-->
-            <a-box position="0 0.5 0"></a-box>
+            
+            <a-entity gltf-model="#amongUS"></a-entity>
             
 
         </a-entity>
