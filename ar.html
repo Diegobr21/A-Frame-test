@@ -46,7 +46,7 @@
             <a class="nav-link" href="skybox.html">Other 3D Model</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">AR-experience  <span class="sr-only">(current)</span> </a>
+            <a class="nav-link" href="ar.html">AR-experience  <span class="sr-only">(current)</span> </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
@@ -68,28 +68,34 @@
         <a-asset-item id="myCarModel" src="models/scene.gltf"></a-asset-item>   
         <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
         <img id="fractal" crossorigin="anonymous" src="images/f2.jpg"> 
+        <a-asset-item id="myCarModel" src="models/scene.gltf"></a-asset-item> 
     </a-assets>
 
-    <!--Modelo 3d-->
-      <a-entity gltf-model="#myCarModel"></a-entity>
 
       <!--Imagen-->
       <a-entity id="links" layout="type: line; margin: 1.5" position="-1.5 -.8 -4">
         <a-entity template="src: #link" data-src="#fractal" data-thumb="#Fractal-thumb"></a-entity>
       </a-entity>
-      <!--Controles de camara
-
-      <a-entity camera look-controls>
-        <a-cursor
-          id="cursor"
-          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
-          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
-          event-set__mouseenter="_event: mouseenter; color: springgreen"
-          event-set__mouseleave="_event: mouseleave; color: black"
-          raycaster="objects: .link"></a-cursor>
+      <a-entity zappar-permissions-ui id="permissions">
+        <!-- Remove the text entity to use Zappar's default permission denied UI -->
+        <a-entity text="value: Please reload the page, accepting the camera permissions." position="0 0 -2"></a-entity>
       </a-entity>
-      -->
-
+  
+      <!--User´s camera-->
+      <a-entity camera zappar-camera></a-entity>
+      <a-entity zappar-instant="placement-mode: true;" id="my-instant-tracker">
+           <!--Modelo 3d-->
+      <a-entity gltf-model="#myCarModel"></a-entity>
+        <!-- PLACE CONTENT TO APPEAR IN THE WORLD HERE -->
+    </a-entity>
+  
+      <script>
+          let myInstantTracker = document.getElementById("my-instant-tracker");
+          document.body.addEventListener("click", () => {
+              myInstantTracker.setAttribute("zappar-instant", "placement-mode: false;");
+          })
+      </script>
+  
     </a-scene>
 
     <!-- Bootstrap core JavaScript -->
