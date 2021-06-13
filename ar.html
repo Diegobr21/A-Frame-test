@@ -8,28 +8,10 @@
   
     <title>Diego test A-FRAME</title>
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-    <!--script src="show_model.js"></script-->
-    <!--Bootstrap core CSS -->
+    <script src="zappar/zappar-aframe.js"></script>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
-    <script>
-      AFRAME.registerComponent('modify-materials', {
-        init: function () {
-          // Wait for model to load.
-          this.el.addEventListener('model-loaded', () => {
-            // Grab the mesh / scene.
-            const obj = this.el.getObject3D('mesh');
-            // Go over the submeshes and modify materials we want.
-            obj.traverse(node => {
-              if (node.name.indexOf('ship') !== -1) {
-                node.material.color.set('red');
-              }
-            });
-          });
-        }
-      });
-    </script>
-
+    
     <!-- Image link template to be reused. 
   Access this site over HTTPS to enter VR mode and grant access to the device sensors
 -->
@@ -58,14 +40,13 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="skybox.html">Other 3D Model</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">AR-experience</a>
+            <a class="nav-link" href="#">AR-experience  <span class="sr-only">(current)</span> </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
@@ -116,3 +97,5 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
+
+
