@@ -11,6 +11,30 @@
     <script src="zappar/zappar-aframe.js"></script>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #zappar-placement-ui {
+            position: absolute;
+            bottom: 30px;
+            width: 200px;
+            left: calc(50% - 100px);
+            z-index: 1000;
+
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            font-family: sans-serif;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
     
     <!-- Image link template to be reused. 
   Access this site over HTTPS to enter VR mode and grant access to the device sensors
@@ -60,7 +84,7 @@
   </nav>
 
 
-    <a-scene background="color: #FFA500">
+    <a-scene>
       <a-assets>
          <!--
         <a-asset-item id="myCarModel" src="https://cdn.aframe.io/test-models/models/glTF-2.0/virtualcity/VC.gltf"></a-asset-item>
@@ -70,31 +94,42 @@
         <img id="fractal" crossorigin="anonymous" src="images/f2.jpg"> 
     </a-assets>
 
-
-      <!--Imagen-->
-      <a-entity id="links" layout="type: line; margin: 1.5" position="-1.5 -.8 -4">
-        <a-entity template="src: #link" data-src="#fractal" data-thumb="#Fractal-thumb"></a-entity>
-      </a-entity>
-      <a-entity zappar-permissions-ui id="permissions">
-        <!-- Remove the text entity to use Zappar's default permission denied UI -->
+    <!-- Ask user for camera permissions -->
+    <a-entity zappar-permissions-ui id="permissions">
         <a-entity text="value: Please reload the page, accepting the camera permissions." position="0 0 -2"></a-entity>
-      </a-entity>
-  
-      <!--User´s camera-->
-      <a-entity camera zappar-camera></a-entity>
-      <a-entity zappar-instant="placement-mode: true;" id="my-instant-tracker">
-           <!--Modelo 3d-->
-      <a-entity gltf-model="#myCarModel"></a-entity>
-        <!-- PLACE CONTENT TO APPEAR IN THE WORLD HERE -->
     </a-entity>
+    <!-- Browser Compatibility -->
+    <a-entity zappar-compatibility-ui id="compatibility"></a-entity>
+    <a-entity camera zappar-camera></a-entity>
+
+        <a-entity zappar-instant="placement-mode: true" id="instant-group">
+
+            <!-- PLACE 3D OBJECTS HERE TO TRACK FROM THE INSTANT ANCHOR 
+            <a-box position="0 0.5 0"></a-box> -->
+                    <!--Modelo 3d-->
+            <a-entity gltf-model="#myCarModel"></a-entity>
+
+        </a-entity>
+
+        <div id="zappar-placement-ui">Tap here to place the object</div>
+
+        <script>
+            // When the user taps on the placement UI
+            var placementUI = document.getElementById("zappar-placement-ui");
+            placementUI.addEventListener("click", function() {
+
+                // Set placement-mode to false on the instant tracker group
+                let instantGroup = document.getElementById("instant-group");
+                instantGroup.setAttribute("zappar-instant", "placement-mode: false");
+
+                // Remove the placement UI
+                placementUI.remove();
+            });
+        </script>
+      
   
-      <script>
-          let myInstantTracker = document.getElementById("my-instant-tracker");
-          document.body.addEventListener("click", () => {
-              myInstantTracker.setAttribute("zappar-instant", "placement-mode: false;");
-          })
-      </script>
-  
+   
+       
     </a-scene>
 
     <!-- Bootstrap core JavaScript -->
